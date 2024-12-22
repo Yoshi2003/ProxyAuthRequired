@@ -1,0 +1,51 @@
+name: Deploy to Amazon EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: debian-latest
+    environment: production
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Configure SSH Access
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+
+    - name: Deploy to EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no admin@ec2-98-83-245-82.compute-1.amazonaws.com << 'EOF'
+          set -e
+
+          # Navigate to the project directory
+          cd /home/admin/ProxyAuthRequired  
+
+          # Pull the latest changes from the repository
+          git fetch --all
+          git reset --hard origin/main
+
+          #recreating the .env 
+          echo "ENV=${{ secrets.ENV }}" >> .env
+          
+          # Stop existing containers
+          docker-compose down
+
+          # Rebuild containers with no cache
+          docker-compose build --no-cache
+
+          # Start the containers in detached mode
+          docker-compose up -d --remove-orphans
+
+          # Optional: Clean up dangling Docker images
+          docker image prune -f
+        EOF
