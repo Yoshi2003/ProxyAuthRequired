@@ -27,25 +27,25 @@ jobs:
         ssh -o StrictHostKeyChecking=no admin@ec2-98-83-245-82.compute-1.amazonaws.com << 'EOF'
           set -e
 
-          # Navigate to the project directory
+          # Navigating to the project directory
           cd /home/admin/ProxyAuthRequired  
 
-          # Pull the latest changes from the repository
+          # Pulling the latest changes from the repository
           git fetch --all
           git reset --hard origin/main
 
           #recreating the .env 
           echo "ENV=${{ secrets.ENV }}" >> .env
           
-          # Stop existing containers
+          # Stopping existing containers
           docker-compose down
 
-          # Rebuild containers with no cache
+          # Rebuilding containers with no cache
           docker-compose build --no-cache
 
-          # Start the containers in detached mode
+          # Starting the containers in detached mode
           docker-compose up -d --remove-orphans
 
-          # Optional: Clean up dangling Docker images
+           Cleaning up dangling Docker images
           docker image prune -f
         EOF
