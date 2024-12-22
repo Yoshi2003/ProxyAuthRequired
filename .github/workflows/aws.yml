@@ -10,7 +10,7 @@ permissions:
 jobs:
   deploy:
     name: Deploy to EC2
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     environment: production
 
     steps:
