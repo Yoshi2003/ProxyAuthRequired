@@ -34,7 +34,7 @@ jobs:
           git fetch --all
           git reset --hard origin/main
 
-          #recreating the .env 
+          # Recreating the .env 
           echo "ENV=${{ secrets.ENV }}" >> .env
           
           # Stopping existing containers
