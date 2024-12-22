@@ -1,22 +1,35 @@
 /* src/components/log.css */
 
-/* Hacker / SIEM Theme with Neon and CRT Effects */
+/* Define CSS Variables */
 :root {
-  --background-color: #000000;
-  --text-color: #00ffea;
-  --primary-color: #ff4d4d;
-  --accent-color: #00ffea;
-  --secondary-bg: #050505;
-  --log-entry-bg: #0a0a0a;
-  --input-bg: #1a1a1a;
-  --input-border: #ff4d4d;
-  --button-bg: #ff4d4d;
-  --button-hover-bg: #e60000;
-  --button-active-bg: #b30000;
-  --history-bg: #1a1a1a;
-  --light-grey: #333333;
+  /* Primary Colors */
+  --primary-red: #cc0000;    /* Updated red */
+  --accent-red: #e60000;     /* Similar red for accents */
+  
+  /* Blue Colors */
+  --primary-blue: #0000ff;   /* Pure blue */
+  --accent-blue: #0044cc;    /* Similar blue for accents */
+  
+  /* Neutral Colors */
+  --white: #ffffff;
+  --light-grey: #d3d3d3;
+  --dark-grey: #121212;
+  
+  /* Input Colors */
+  --input-border: #cc0000;   /* Matching red */
+  --input-bg: #8c8c8c;       /* White background for inputs */ /* Updated */
+  --text-color: #0000ff;     /* Proper blue text */ /* Updated */
+  
+  /* Button Colors */
+  --button-bg: #cc0000;          /* Matching red */
+  --button-hover-bg: #ff3333;    /* Lighter red on hover */
+  --button-active-bg: #990000;   /* Darker red on active */
+  
+  /* Log Entry Background */
+  --log-entry-bg: rgba(18, 18, 18, 0.85); /* Semi-transparent dark background */
 }
 
+/* Keyframes for Flicker Animation */
 @keyframes flicker {
   0% {opacity:1;}
   50% {opacity:0.8;}
@@ -50,46 +63,99 @@
   opacity:0.3;
 }
 
-body {
-  font-family: "Courier New", Courier, monospace;
-  background: var(--secondary-bg);
-  color: var(--text-color);
-  margin:0;
-  padding:0;
+/* Reset and Global Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-/* Neon Border */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Centering the Background Image */
+.log-page-container.crt-overlay {
+  /* Remove existing background properties to prevent conflicts */
+  /* background: url('./logbackground.jpg') center center no-repeat;
+  background-size: cover;
+  z-index: -1; */
+  
+  /* Use a pseudo-element to add the background image with opacity */
+  position: relative; /* Ensure positioning context */
+}
+
+.log-page-container.crt-overlay::before { /* Updated */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('./logbackground.jpg') center no-repeat;
+  background-size: cover;
+  opacity: 0.11; /* Adjust opacity as needed */
+  border-radius: 15px; /* Match the container's rounded corners if any */
+}
+
+/* Neon Borders */
 .neon-border {
-  border: 1px solid var(--accent-color);
-  box-shadow: 0 0 5px var(--accent-color), inset 0 0 5px var(--accent-color);
+  border: 1px solid var(--accent-red); /* Updated color */
+  box-shadow: 0 0 8px var(--accent-red), inset 0 0 8px var(--accent-red); /* Updated shadow */
+  border-radius: 12px; /* Rounded corners */
 }
 
+/* Title Styling */
 .log-page-title {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 30px;
-  color: var(--accent-color);
-  text-shadow: 0 0 10px var(--accent-color);
-  animation: flicker 2s infinite alternate;
+  color: #000;/* Updated color */
+  text-shadow: 2px 2px 0px #fff;
+  
+  /* Enhanced Professional Look */
+  font-family: 'Arial', sans-serif; /* Updated font */
+  font-weight: bold; /* Increased weight */
 }
 
+/* Hacker Panel with Background Image */
 .hacker-panel {
+  position: relative; /* Needed for pseudo-element positioning */
   background: var(--log-entry-bg);
   padding: 20px;
   margin-bottom: 20px;
-  position: relative;
+  border-radius: 15px; /* Rounded edges */
+  overflow: hidden;    /* Ensures pseudo-element doesn't overflow */
 }
 
+/* Pseudo-element for Background Image */
+.hacker-panel::before {
+  content: "";
+  position: absolute; /* Updated from relative to absolute */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('./logbackground.jpg') center center no-repeat;
+  background-size: cover;
+  opacity: 0.1; /* Adjust opacity as needed */
+  z-index: -1; /* Places the image behind the content */
+  border-radius: 15px; /* Match the panel's rounded corners */
+}
+
+/* Custom Scrollbar */
 .hacker-scroll::-webkit-scrollbar {
-  width: 8px;
+  width: 10px; /* Increased width for better visibility */
 }
 .hacker-scroll::-webkit-scrollbar-track {
   background: var(--light-grey);
-  border-radius: 4px;
+  border-radius: 10px;
 }
 .hacker-scroll::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
-  border-radius: 4px;
+  background-color: var(--primary-red); /* Updated color */
+  border-radius: 10px;
 }
 .hacker-scroll::-webkit-scrollbar-thumb:hover {
   background-color: var(--button-hover-bg);
@@ -113,25 +179,33 @@ body {
 .control-group label {
   margin-bottom: 5px;
   font-weight: bold;
-  color: var(--accent-color);
+  color: var(--accent-red); /* Updated color */
+  font-family: 'Arial', sans-serif; /* Cleaner font */
 }
 
+/* Enhanced Input Styling */
 .control-group select,
 .control-group input[type="number"] {
-  padding: 10px;
-  border: 2px solid var(--input-border);
-  border-radius: 4px;
-  background-color: var(--input-bg);
-  color: var(--text-color);
+  padding: 12px; /* Increased padding for better appearance */ /* Updated */
+  border: 2px solid var(--input-border); /* Updated border color */
+  border-radius: 8px; /* Rounded inputs */ /* Updated */
+  background-color: var(--input-bg); /* Updated background */
+  color: var(--text-color); /* Updated text color */
   font-size: 1rem;
   outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for box-shadow */
+  
+  /* Add subtle box-shadow */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Added */
 }
 
 .control-group select:focus,
 .control-group input[type="number"]:focus {
-  border-color: var(--primary-color);
+  border-color: var(--primary-red); /* Updated focus border color */
+  box-shadow: 0 0 8px var(--primary-red); /* Added focus box-shadow */
 }
 
+/* Additional Class for Max Count (if used) */
 .max-count {
   margin-left: 5px;
   font-size: 0.9rem;
@@ -141,50 +215,44 @@ body {
 
 /* Buttons */
 .generate-btn,
-.analyze-individual-btn,
 .reset-btn,
-.history-controls button,
-.export-btn,
-.export-options button {
-  background-color: var(--button-bg);
+.history-controls button {
+  background-color: var(--button-bg); /* Updated background color */
   border: none;
-  border-radius: 4px;
-  color: var(--text-color);
-  padding: 10px;
+  border-radius: 8px; /* Rounded buttons */ /* Updated */
+  color: var(--white); /* Changed text color to white */ /* Updated */
+  padding: 12px 24px; /* Increased padding */ /* Updated */
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease; /* Simplified transition */
   margin-top: 10px;
   position: relative;
   overflow: hidden;
+  font-family: 'Arial', sans-serif; /* Cleaner font */ /* Updated */
+  font-weight: bold; /* Increased font weight */ /* Updated */
 }
 
 .generate-btn:hover,
-.analyze-individual-btn:hover,
 .reset-btn:hover,
-.history-controls button:hover,
-.export-btn:hover,
-.export-options button:hover {
-  background-color: var(--button-hover-bg);
-  box-shadow: 0 0 8px var(--accent-color);
+.history-controls button:hover {
+  background-color: var(--button-hover-bg); /* Updated hover background */
 }
 
 .generate-btn:active,
-.analyze-individual-btn:active,
 .reset-btn:active,
-.history-controls button:active,
-.export-btn:active,
-.export-options button:active {
-  background-color: var(--button-active-bg);
-  box-shadow: 0 0 15px var(--accent-color);
+.history-controls button:active {
+  background-color: var(--button-active-bg); /* Updated active background */
+  box-shadow: 0 0 20px var(--primary-red); /* Enhanced shadow on active */ /* Updated */
 }
 
+/* Disable State for Analyze Individual Button */
 .analyze-individual-btn:disabled {
   background-color: #555555;
   cursor: not-allowed;
   opacity: 0.7;
 }
 
+/* Neon Button Effect (if used) */
 .neon-btn::after {
   content:"";
   position:absolute;
@@ -192,9 +260,6 @@ body {
   top:0;
   width:200%;
   height:100%;
-  background:rgba(255,255,255,0.1);
-  transform:skewX(-45deg);
-  transition: all 0.3s ease;
 }
 
 .neon-btn:hover::after {
@@ -206,8 +271,8 @@ body {
   position: relative;
   width: 100%;
   height: 25px;
-  background-color: #111111;
-  border-radius: 12.5px;
+  background-color: var(--light-grey); /* Updated background color */
+  border-radius: 12.5px; /* Rounded progress bar */ /* Updated */
   margin-bottom: 20px;
   overflow: hidden;
 }
@@ -215,7 +280,7 @@ body {
 .progress-bar {
   height: 100%;
   width: 0%;
-  background-color: var(--accent-color);
+  background-color: var(--accent-red); /* Updated progress color */
   transition: width 0.3s ease;
 }
 
@@ -224,9 +289,10 @@ body {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--text-color);
+  color: var(--text-color); /* Updated text color */
   font-weight: bold;
   line-height: 25px;
+  font-family: 'Arial', sans-serif; /* Cleaner font */ /* Updated */
 }
 
 /* Logs Display */
@@ -240,17 +306,19 @@ body {
 }
 
 .log-entry {
-  background-color: var(--log-entry-bg);
+  background-color: var(--log-entry-bg); /* Updated background */
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 15px; /* Rounded log entries */ /* Updated */
   position: relative;
+  font-family: 'Arial', sans-serif; /* Cleaner font */ /* Updated */
 }
 
 .log-event {
   margin-top: 0;
-  color: var(--accent-color);
-  text-shadow: 0 0 5px var(--accent-color);
+  color: var(--primary-red); /* Updated color */
+  text-shadow: 0 0 5px var(--primary-red); /* Updated shadow */
   font-weight: bold;
+  font-family: 'Arial', sans-serif; /* Cleaner font */ /* Updated */
 }
 
 .log-entry p {
@@ -261,7 +329,7 @@ body {
 }
 
 .log-entry p strong {
-  color: var(--primary-color);
+  color: var(--primary-red); /* Updated color */
 }
 
 .log-details {
@@ -279,14 +347,11 @@ body {
   color: var(--text-color);
 }
 
-.severity-critical { border-left: 5px solid var(--primary-color); }
-.severity-high { border-left: 5px solid #ff8888; }
-.severity-medium { border-left: 5px solid #ffcccc; }
-.severity-low { border-left: 5px solid #ff00ff; }
-.severity-info { border-left: 5px solid #00ffea; }
-.severity-debug { border-left: 5px solid #00ff00; }
-.severity-all { border-left: 5px solid var(--accent-color); }
+/* Severity Highlights */
+.severity-critical { border-left: 5px solid var(--primary-red); } /* Updated */
+.severity-info { border-left: 5px solid var(--accent-red); } /* Updated */
 
+/* Analysis Result */
 .analysis-result {
   margin-top: 10px;
 }
@@ -294,17 +359,17 @@ body {
 .analysis-box {
   background-color: #000000;
   padding: 15px;
-  border-radius: 4px;
+  border-radius: 8px; /* Increased border radius for better look */ /* Updated */
   white-space: pre-wrap;
   font-size: 1rem;
   overflow-x: auto;
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--accent-red); /* Updated border color */
 }
 
 /* History */
 .log-history {
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 20px; /* Increased border radius for better look */ /* Updated */
   margin-bottom: 30px;
   position: relative;
 }
@@ -325,13 +390,13 @@ body {
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 10px;
-  box-shadow: 0 0 5px var(--accent-color);
+  box-shadow: 0 0 5px var(--accent-red); /* Updated shadow */
 }
 
 .history-entry h4 {
   margin: 0 0 10px 0;
-  color: var(--accent-color);
-  text-shadow: 0 0 3px var(--accent-color);
+  color: var(--accent-red); /* Updated color */
+  text-shadow: 0 0 3px var(--accent-red); /* Updated shadow */
 }
 
 .history-entry p {
@@ -357,8 +422,8 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--input-bg);
-  border: 1px solid var(--primary-color);
+  background: var(--input-bg); /* Updated background */
+  border: 1px solid var(--primary-red); /* Updated border color */
   z-index: 10;
 }
 
@@ -374,29 +439,38 @@ body {
   text-align: left;
   padding: 8px 10px;
   width: 100%;
-  color: var(--text-color);
+  color: var(--text-color); /* Updated text color */
 }
 
 .export-options button:hover {
-  background-color: var(--button-hover-bg);
+  background-color: var(--button-hover-bg); /* Updated hover background */
 }
 
 .empty-message {
-  color: var(--primary-color);
+  color: var(--primary-red); /* Updated color */
   text-align: center;
   font-size: 1.2rem;
   margin-top: 50px;
   animation: flicker 2s infinite alternate;
+  font-family: 'Arial', sans-serif; /* Cleaner font */ /* Updated */
 }
 
-/* Responsive */
+/* Footer */
+.resources-footer {
+  text-align: center;
+  color: #aaaaaa;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
 @media (max-width: 1024px) {
   .log-page-container {
     padding: 15px;
   }
 
   .log-page-title {
-    font-size: 2rem;
+    font-size: 2rem; /* Slightly smaller title on medium screens */ /* Updated */
   }
 }
 
@@ -416,34 +490,50 @@ body {
 
 @media (max-width: 480px) {
   .log-page-title {
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Slightly smaller on very small screens */ /* Updated */
   }
 
   .control-group label {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Updated label font size */
   }
 
   .control-group select,
   .control-group input[type="number"] {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Updated input font size */
   }
 
   .generate-btn,
-  .analyze-individual-btn,
+  .reset-btn,
   .history-controls button,
   .export-btn,
-  .reset-btn,
+  .analyze-individual-btn, /* Added missing button */
   .export-options button {
-    font-size: 0.8rem;
-    padding: 6px 10px;
+    font-size: 0.8rem;   /* Slightly smaller text */ /* Updated */
+    padding: 6px 10px; /* Adjust padding */ /* Updated */
   }
 
   .analysis-box {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Adjust font size */ /* Updated */
   }
 
   .history-entry p {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Adjust font size */ /* Updated */
+  }
+}
+
+/* Keyframes for Flicker Animation */
+@keyframes flicker {
+  0% {
+    opacity: 1;
+    text-shadow: 0 0 12px var(--primary-red), 0 0 20px var(--accent-red);
+  }
+  50% {
+    opacity: 0.5;
+    text-shadow: 0 0 8px var(--primary-red), 0 0 16px var(--accent-red);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 12px var(--primary-red), 0 0 20px var(--accent-red);
   }
 }
 

@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -17,11 +18,13 @@ body, html {
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+/* Scenario Body */
 .scenario-body {
   background-image: url('backround5.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: 'Roboto', sans-serif;
   width: 100%;
   min-height: 100vh;
@@ -29,7 +32,7 @@ body, html {
   box-sizing: border-box;
 }
 
-/* Container now just max-width and center */
+/* Container */
 .scenario-container {
   display: flex;
   flex-wrap: wrap;
@@ -40,13 +43,58 @@ body, html {
 
 .scenario-input-section,
 .scenario-output-container {
-  background-color: rgba(30,30,30,0.85);
+  background-color: rgba(30, 30, 30, 0.85);
   border-radius: 12px;
   padding: 20px;
   flex: 1 1 100%; /* On small screens, stack */
   box-sizing: border-box;
 }
 
+/* Autocomplete Suggestions */
+.suggestions-list {
+  position: absolute;
+  background-color: #2a2a2a;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 1000; /* Ensure it appears above other elements */
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 3.75rem;
+  border-radius: 0 0 8px 8px;
+}
+
+.suggestions-list li {
+  padding: 10px;
+  cursor: pointer;
+  color: #f5f5f5;
+}
+
+.suggestions-list li:hover,
+.suggestion-active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.show-all-suggestions {
+  padding: 10px;
+  cursor: pointer;
+  color: #00ffcc;
+  border-top: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.show-all-suggestions:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure the suggestions list is above other elements */
+.scenario-input-wrapper {
+  position: relative;
+}
+
+/* Scenario Titles */
 .scenario-title {
   color: #cc0000;
   font-size: 2em;
@@ -60,12 +108,14 @@ body, html {
   margin-bottom: 30px;
 }
 
+/* Input Wrappers */
 .scenario-input-wrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
 }
 
+/* Input Fields and Sliders */
 .scenario-input-field, .scenario-input-slider {
   padding: 12px;
   border-radius: 8px;
@@ -76,6 +126,56 @@ body, html {
   font-size: 1rem;
 }
 
+.scenario-input-field:focus, .scenario-input-slider:focus, select:focus {
+  outline: none;
+  border-color: #00ffcc;
+}
+
+/* Slider Styles for WebKit (Safari, iOS) */
+.scenario-input-slider {
+  -webkit-appearance: none; /* Remove default styling */
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+  border-radius: 4px;
+  outline: none;
+  margin-top: 10px;
+}
+
+.scenario-input-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00ffcc;
+  cursor: pointer;
+  border: 2px solid #fff;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.scenario-input-slider::-webkit-slider-thumb:hover {
+  background: #00e6b8;
+  transform: scale(1.1);
+}
+
+.scenario-input-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00ffcc;
+  cursor: pointer;
+  border: 2px solid #fff;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.scenario-input-slider::-moz-range-thumb:hover {
+  background: #00e6b8;
+  transform: scale(1.1);
+}
+
+
+/* Button and Loading Sphere */
 .button-and-sphere {
   display: flex;
   align-items: center;
@@ -115,6 +215,7 @@ body, html {
   to { transform: rotate(360deg); }
 }
 
+/* Scenario Output */
 .scenario-output-box {
   padding: 20px;
   background-color: #2a2a2a;
@@ -136,6 +237,7 @@ body, html {
   font-weight: bold;
 }
 
+/* Interactive Questions */
 .interactive-questions {
   margin-top: 20px;
 }
@@ -158,18 +260,166 @@ body, html {
   line-height: 1.4;
 }
 
-.scenario-input-field:focus, .scenario-input-slider:focus, select:focus {
-  outline: none;
-  border-color: #00ffcc;
+/* Question Container */
+.question-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+.question-text {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #f5f5f5;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-label {
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.option-label:hover,
+.option-label:focus-within {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.option-text {
+  margin-left: 8px;
+  color: #ffffff;
+}
+
+.option-label input[type="radio"] {
+  accent-color: #00ffcc; /* Custom radio button color */
+  font-weight: bold;
+}
+
+.option-label:focus-within {
+  outline: 2px solid #00ffcc;
+}
+
+/* Feedback Styles */
+.feedback {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.feedback.correct {
+  background-color: #181818;
+  color: #00e600;
+}
+
+.feedback.incorrect {
+  background-color: #181818;
+  color: #ff0000;
+}
+
+.explanation {
+  margin-top: 5px;
+  font-weight: normal;
+  font-size: 0.95rem;
+  color: #f5f5f5;
+}
+
+/* Enhanced Feedback Styles */
+.feedback.correct,
+.feedback.incorrect {
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+
+/* For Tablets and Larger Devices */
+@media (min-width: 768px) {
+  .scenario-container {
+    flex-direction: row;
+  }
+
+  .scenario-title {
+    font-size: 1.8em;
+  }
+
+  .question-container {
+    padding: 15px;
+  }
+
+  .question-text {
+    font-size: 1.2rem;
+  }
+
+  .option-label {
+    padding: 10px;
+  }
+
+  .explanation {
+    font-size: 1rem;
+  }
+}
+
+/* For Desktops and Larger Monitors */
+@media (min-width: 1024px) {
+  .scenario-container {
+    flex-direction: row;
+  }
+
+  .question-container {
+    padding: 20px;
+  }
+
+  .question-text {
+    font-size: 1.3rem;
+  }
+
+  .option-label {
+    padding: 12px;
+  }
+
+  .explanation {
+    font-size: 1.05rem;
+  }
+}
+
+/* For Mobile Devices */
+@media (max-width: 767px) {
   .scenario-container {
     flex-direction: column;
   }
+
   .scenario-title {
-    font-size: 1.8em;
+    font-size: 1.5em;
+  }
+
+  .scenario-input-section,
+  .scenario-output-container {
+    flex: 1 1 100%;
+  }
+
+  .question-container {
+    padding: 10px;
+  }
+
+  .question-text {
+    font-size: 1rem;
+  }
+
+  .option-label {
+    padding: 8px;
+  }
+
+  .explanation {
+    font-size: 0.9rem;
   }
 }
 

@@ -1,5 +1,3 @@
-
-
 import os
 import logging
 from flask import Blueprint, request, jsonify, session
@@ -77,12 +75,10 @@ def generate_scenario_endpoint():
         return jsonify({
             'scenario': scenario_text,
             'breakdown': scenario_breakdown,
-            'interactive_questions': interactive_questions
+            'interactive_questions': interactive_questions  # Now structured JSON
         }), 200
 
     except Exception as e:
         logger.error(f"Error while generating scenario: {e}")
         return jsonify({'error': 'An internal error occurred while generating the scenario. Please try again later.'}), 500
-
-
 

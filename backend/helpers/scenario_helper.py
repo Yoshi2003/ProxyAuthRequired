@@ -1,6 +1,5 @@
 import os
 import logging
-from helpers.openai_helper import client
 import re
 from API.AI import client
 
@@ -26,7 +25,7 @@ def generate_scenario(industry, attack_type, skill_level, threat_intensity):
         response = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
             model="gpt-4o",
-            max_tokens=500,
+            max_tokens=1000,
             temperature=0.7,
         )
 

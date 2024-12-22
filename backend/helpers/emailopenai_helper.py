@@ -21,7 +21,7 @@ def generate_email_content(subject, prompt):
         response = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
             model="gpt-4o",
-            max_tokens=500,
+            max_tokens=1000,
             temperature=0.7,
         )
         return response.choices[0].message.content.strip()
@@ -42,9 +42,13 @@ def generate_daily_email(subject, frequency):
         List[str]: A list of generated email content for each instance in the frequency.
     """
     prompt = (
-        f"Create an informative email regarding the topic '{subject}'. "
-        "It should include relevant content suitable for daily email subscribers. Make each email slightly different, "
-        "with unique examples or insights to keep the information engaging over multiple occurrences."
+        f"Create an engaging and educational email about the topic '{subject}', designed for daily subscribers interested in learning about this subject. "
+        "The email should be structured with a clear introduction, 2-3 actionable tips or insights, and a conclusion with a motivational or thought-provoking statement. "
+        "Incorporate unique examples, analogies, or real-world scenarios related to the topic to make it memorable and engaging. "
+        "Ensure the content is easy to read and provides value for both beginners and advanced learners. "
+        "Each email should be slightly different, using new examples, insights, or perspectives to keep the series fresh and engaging over time."
+        "Do not excplicity mention you are an AI or mention that you will do what I ask. Aslo do not mention subscribers or anything"
+        "At the end of the email replace - Best regards, [Your Name] [Your Position] [Your Contact Information] with - Respectfully, CarterPerez, Dev, CarterPerez-dev@proxyauthrequired.com"
     )
 
     try:
@@ -53,8 +57,8 @@ def generate_daily_email(subject, frequency):
             response = client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
                 model="gpt-4o",
-                max_tokens=500,
-                temperature=0.8,
+                max_tokens=1000,
+                temperature=0.7,
             )
             generated_emails.append(response.choices[0].message.content.strip())
 

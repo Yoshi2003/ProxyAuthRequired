@@ -466,7 +466,7 @@ const App = () => {
 
   return (
     <div className="log-page-container crt-overlay">
-      <h1 className="log-page-title">[ SIEM LOG ANALYSIS TERMINAL ]</h1>
+      <h1 className="log-page-title"> LOG ANALYSIS TERMINAL </h1>
 
       <ToastContainer
         position="top-right"

@@ -5,13 +5,13 @@ import logging
 # Configure logger
 logger = logging.getLogger(__name__)
 
-# Create an AI Manager instance
+
 xploit = Xploits()
 
-# Create a blueprint
+
 xploit_bp = Blueprint('xploit_bp', __name__)
 
-# Route to generate a payload
+
 @xploit_bp.route('/generate_payload', methods=['POST'])
 def generate_payload_endpoint():
     data = request.get_json()
@@ -25,7 +25,7 @@ def generate_payload_endpoint():
     evasion_technique = data.get('evasion_technique')
 
     try:
-        payload = xploits.generate_exploit_payload(vulnerability, evasion_technique)
+        payload = xploit.generate_exploit_payload(vulnerability, evasion_technique)
         logger.debug(f"Generated payload: {payload}")
         return jsonify({'payload': payload})
     except Exception as e:

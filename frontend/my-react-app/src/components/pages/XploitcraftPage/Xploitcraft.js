@@ -1,8 +1,6 @@
 // components/xploitcraft.js
 import React, { useState, useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { gruvboxDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import logo from './logo5.png';
 import loadingIcon from './loading3.png';
 import './App.css';
@@ -795,7 +793,6 @@ const evasionTechniquesList = [
   "Substitute chars with fullwidth forms example",
   "Inserting control characters like BEL or BS example",
   "Pausing code execution until certain time example" 
-  // "Pausing code execution until certain time" already no forbidden words, just add " example"
 ];
 
 
@@ -823,25 +820,47 @@ function Home() {
     };
   }, []);
 
+  
+  const sanitizeInput = (input) => {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      '/': '&#x2F;',
+      '`': '&#x60;',
+      '=': '&#x3D;',
+    };
+    const reg = /[&<>"'`=/]/g;
+    return input.replace(reg, (match) => map[match]);
+  };
+
   const handleGeneratePayload = () => {
-    if (vulnerability && evasionTechnique) {
+    if (vulnerability || evasionTechnique) { 
       setLoading(true);
+
+     
+      const sanitizedVulnerability = vulnerability ? sanitizeInput(vulnerability) : "";
+      const sanitizedEvasionTechnique = evasionTechnique ? sanitizeInput(evasionTechnique) : "";
+
+     
+      const requestData = {};
+      if (sanitizedVulnerability) requestData.vulnerability = sanitizedVulnerability;
+      if (sanitizedEvasionTechnique) requestData.evasion_technique = sanitizedEvasionTechnique;
 
       fetch(`${ENDPOINT}/payload/generate_payload`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          vulnerability: vulnerability,
-          evasion_technique: evasionTechnique,
-        }),
+        body: JSON.stringify(requestData),
       })
         .then((response) => response.json())
         .then((data) => {
           if (data.payload) {
             if (data.payload.trim().startsWith("I'm sorry, I can't assist with that request.")) {
-              setPayload("It looks like openai is facing some ethical problems lol, please try again with different exploits/evasion techniques and/or refresh the page. If the issue persists please notify me at CarterPerez@ProxyAuthRequired.com and I will fix it as soon as possible. Thanks!");
+              setPayload("It looks like OpenAI is facing some ethical problems lol, please try again with different exploits/evasion techniques and/or refresh the page. If the issue persists, please notify me at CarterPerez@ProxyAuthRequired.com and I will fix it as soon as possible. Thanks!");
             } else {
               setPayload(data.payload);
             }
@@ -855,8 +874,8 @@ function Home() {
           alert('Failed to connect to the backend server. Please check the server connection.');
           setLoading(false);
         });
-    } else {
-      alert("Please enter both vulnerability and evasion technique");
+    } else { 
+      alert("Please enter at least one of vulnerability or evasion technique");
     }
   };
 
@@ -870,13 +889,57 @@ function Home() {
     }
   };
 
+  
+  const processPayload = (text) => {
+    if (!text) return null;
+
+   
+    const regex = /(\bor\b)|(\b\d+\b)|([!@#$%^&=+*()])|([:;"'>?<{}\[\]\\])|([-\/|])/gi;
+
+    const elements = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+      const [matchedText, orWord, number, yellowSymbol, greenSymbol, greySymbol] = match;
+      const { index } = match;
+
+     
+      if (index > lastIndex) {
+        elements.push(text.substring(lastIndex, index));
+      }
+
+    
+      if (orWord) {
+        elements.push(<span key={`or-word-${index}`} className="or-word">{matchedText}</span>);
+      } else if (number) {
+        elements.push(<span key={`number-${index}`} className="number">{matchedText}</span>);
+      } else if (yellowSymbol) {
+        elements.push(<span key={`yellow-symbol-${index}`} className="yellow-symbol">{matchedText}</span>);
+      } else if (greenSymbol) {
+        elements.push(<span key={`green-symbol-${index}`} className="green-symbol">{matchedText}</span>);
+      } else if (greySymbol) {
+        elements.push(<span key={`grey-symbol-${index}`} className="grey-symbol">{matchedText}</span>);
+      }
+
+      lastIndex = regex.lastIndex;
+    }
+
+   
+    if (lastIndex < text.length) {
+      elements.push(text.substring(lastIndex));
+    }
+
+    return elements;
+  };
 
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="header-title">XploitCraft </h1>
+      <h1 className="header-title">XploitCraft</h1>
 
       <div className="input-container-horizontal">
+        {/* Vulnerability Input */}
         <input
           type="text"
           placeholder="Enter Vulnerability or Xploit"
@@ -887,10 +950,15 @@ function Home() {
         />
         <datalist id="vulnerability-list">
           {vulnerabilitiesList.map((vuln, index) => (
-            <option key={index} value={vuln} />
+            <option
+              key={index}
+              label={vuln.replace(/ example$/, '')} 
+              value={vuln} 
+            />
           ))}
         </datalist>
 
+        {/* Evasion Technique Input */}
         <input
           type="text"
           placeholder="Enter Evasion Technique or Delivery Method"
@@ -901,7 +969,11 @@ function Home() {
         />
         <datalist id="evasion-list">
           {evasionTechniquesList.map((tech, index) => (
-            <option key={index} value={tech} />
+            <option
+              key={index}
+              label={tech.replace(/ example$/, '')} 
+              value={tech} 
+            />
           ))}
         </datalist>
       </div>
@@ -920,20 +992,9 @@ function Home() {
           <button className="copy-button-payload" onClick={handleCopyClick}>Copy</button>
           <h2 className="generated-payload-title">Generated Payload</h2>
           <div className="payload-content">
-            <SyntaxHighlighter
-              language="python"
-              style={gruvboxDark}
-              customStyle={{
-                whiteSpace: 'pre-wrap',
-                overflowWrap: 'break-word',
-                wordBreak: 'break-all',
-                lineHeight: '1.00',
-                width: '100%',
-                tabSize: '4',
-              }}
-            >
-              {payload}
-            </SyntaxHighlighter>
+            <pre className="payload-text">
+              {processPayload(payload)}
+            </pre>
           </div>
         </div>
       )}
@@ -942,4 +1003,3 @@ function Home() {
 }
 
 export default Home;
-

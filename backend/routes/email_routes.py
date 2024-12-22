@@ -20,8 +20,7 @@ def schedule_email():
             return jsonify({"error": "Missing required parameters."}), 400
 
         # Generate content using OpenAI
-        prompt = f"Write an informative email about a topic related to {cert_category}."
-        email_content = generate_email_content(subject=f"Daily CyberBrief - {cert_category}", prompt=prompt)
+        email_content = generate_email_content(subject=f"Daily CyberBrief, prompt=prompt")
 
         # Schedule email task using the scheduler helper
         for time_slot in time_slots:

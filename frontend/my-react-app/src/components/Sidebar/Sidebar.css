@@ -26,6 +26,21 @@ body, html {
   overflow-y: auto;
 }
 
+/* Custom scrollbar for sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: #cc0000;
+  border-radius: 3px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #ff0000;
+}
+
 .sidebar.collapsed {
   transform: translateX(-220px);
 }
@@ -86,7 +101,7 @@ body, html {
   filter: brightness(2.2);
 }
 
-/* Toggle button visible at all times */
+/* Toggle button visible on all screens */
 .sidebar-toggle {
   position: absolute;
   top: 10px;
@@ -94,15 +109,25 @@ body, html {
   z-index: 2001;
   background-color: #121212;
   border: 2px solid #ffffff;
-  border-radius: 5px;
+  border-radius: 50%;
   color: #cc0000;
   padding: 10px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: left 0.3s ease;
+  transition: left 0.3s ease, background-color 0.3s ease;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 20px;
 }
 
-/* If sidebar is collapsed, move toggle button closer */
+/* A cooler hover effect for toggle */
+.sidebar-toggle:hover {
+  background-color: #cc0000;
+  color: #ffffff;
+}
+
+/* If sidebar is collapsed, move toggle button closer to screen edge */
 .sidebar.collapsed ~ .sidebar-toggle {
   left: 10px;
 }

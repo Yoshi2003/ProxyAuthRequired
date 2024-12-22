@@ -15,11 +15,11 @@ def send_scheduled_email(email, cert_category, prompt):
     try:
         # Generate email content
         email_content = generate_email_content(
-            subject=f"Daily CyberBrief - {cert_category}",
+            subject=f"Daily CyberBrief",
             prompt=prompt
         )
         # Send the email
-        send_email(recipient=email, subject=f"Daily CyberBrief - {cert_category}", body=email_content)
+        send_email(recipient=email, subject=f"Daily CyberBrief", body=email_content)
     except Exception as e:
         print(f"Error while sending email: {str(e)}")
 

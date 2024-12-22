@@ -237,9 +237,9 @@ def analyze_log(log_record: Log) -> str:
     while attempt < MAX_RETRIES:
         try:
             response = client.chat.completions.create(
-                model="gpt-4",  
+                model="gpt-4o",  
                 messages=[{"role": "user", "content": formatted_prompt}],
-                max_tokens=1000,
+                max_tokens=1200,
                 temperature=0.7,
             )
             content = response.choices[0].message.content.strip()

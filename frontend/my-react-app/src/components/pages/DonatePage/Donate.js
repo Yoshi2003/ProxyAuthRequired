@@ -13,7 +13,7 @@ function Donate() {
             <div className="donate-box">
                 <h1 className="donate-title">Hello Friend!</h1>
                 <p className="donate-description">
-                    Thanks for using the site. I started this project to make studying a bit more fun and accessible for everyone. Maintaining it involves a few costs—like the OpenAI API, AWS, SendGrid, and Splunk. If you find this platform valuable and would like to support its growth, feel free to contribute via Bitcoin to the address below.
+                    Thanks for using the site. I started this project to make studying a bit more fun and accessible for everyone. Maintaining it involves a few costs—like-- OpenAI API, AWS, SendGrid, and Google Workspace. If you find this platform valuable and would like to support its growth, feel free to contribute via Bitcoin to the address below. ---Or just let me know if you enjoy this website and or offer me suggestions/improvements at CarterPerez-dev@ProxyAuthRequired.com
                 </p>
                 <div className="bitcoin-box">
                     <input
