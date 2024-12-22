@@ -389,20 +389,51 @@ The frontend is developed using modern JavaScript frameworks and libraries, ensu
 - **Browser Compatibility:**
   - **Browserslist**: Configures supported browsers for both production and development environments, ensuring that the application functions correctly across a wide range of user agents.
 
-### DevOps and Deployment
+# DevOps and Deployment
 
-Ensuring seamless deployment, scalability, and maintainability through a comprehensive set of DevOps tools and practices.
+-  ## Apache:
+   Apache acts as the core web server in my setup, handling requests from  Nginx and Amazon CloudFront and routing them to the appropriate backend services.
 
-- **Docker**: Containerizes the application, ensuring consistent environments across development, testing, and production stages.
+ - ## GitHub Actions CI/CD Pipeline:
 
-- **GitHub Actions**: Automates the CI/CD pipeline, facilitating continuous integration, testing, and deployment processes to my Amazon AWS EC2 server.
+Automates deployment to Amazon EC2 upon every push to the main branch.
+Executes critical deployment steps such as pulling the latest code, building Docker containers with --no-cache, and restarting services with docker-compose.
 
-- **Nginx**: Serves as a reverse proxy and load balancer, managing incoming traffic and distributing it efficiently across backend services.
+- ## Amazon EC2:
 
-- **Amazon AWS**:  Amazon AWS serves as the backbone of my application’s infrastructure, providing reliable hosting through Amazon EC2 and secure, low-latency content delivery with Amazon CloudFront. Its seamless integration with services like AWS Certificate Manager (ACM) and AWS WAF ensures my application is secure, scalable, and optimized for global performance.
+Hosts the application in a highly reliable and scalable environment.
+Utilizes a Debian-based instance optimized for performance and resource efficiency.
 
--  **Apache**:  Apache acts as the core web server in my setup, handling requests from  Nginx and Amazon CloudFront and routing them to the appropriate backend services.
+ - ## SSH Automation:
 
+Securely connects to the EC2 instance using encrypted SSH keys stored in GitHub Secrets.
+Facilitates real-time updates and deployments without manual intervention.
+
+- ## Dockerized Workflow:
+
+Leverages Docker Compose to manage multi-container deployments for the backend, frontend, Nginx, and auxiliary services like Redis.
+
+- ## Nginx Integration:
+ 
+ Acts as a reverse proxy, load balancer, and SSL termination point, ensuring secure and optimized traffic flow to backend and frontend services.
+
+- ## Monitoring and Logging:
+
+Configured with AWS CloudWatch for monitoring server health and performance.
+Logs traffic patterns, access details, and error diagnostics for real-time insights.
+
+- ## AWS Certificate Manager (ACM):
+
+Manages SSL/TLS certificates to secure communications across all application layers.
+Automatically renews certificates to ensure uninterrupted security.
+
+- ## AWS CloudFront:
+
+Provides a global content delivery network (CDN) to cache static assets, reducing latency for users worldwide and optimizing load times.
+Scaling and Security:
+Pre-configured for horizontal scaling with Auto Scaling Groups (future integration).
+
+Utilizes AWS Web Application Firewall (WAF) for advanced protection against DDoS attacks and malicious traffic.
 ---
 
 # Setup Instructions
