@@ -432,7 +432,6 @@ Automatically renews certificates to ensure uninterrupted security.
 Provides a global content delivery network (CDN) to cache static assets, reducing latency for users worldwide and optimizing load times.
 Scaling and Security:
 Pre-configured for horizontal scaling with Auto Scaling Groups (future integration).
-
 Utilizes AWS Web Application Firewall (WAF) for advanced protection against DDoS attacks and malicious traffic.
 ---
 
