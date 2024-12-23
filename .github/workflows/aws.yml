@@ -30,6 +30,9 @@ jobs:
           # Navigating to the project directory
           cd /home/admin/ProxyAuthRequired  
 
+          # root
+          sudo su
+        
           # Pulling the latest changes from the repository
           git fetch --all
           git reset --hard origin/main
