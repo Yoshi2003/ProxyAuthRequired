@@ -28,7 +28,7 @@ body, html {
 
 /* Custom scrollbar for sidebar */
 .sidebar::-webkit-scrollbar {
-  width: 6px;
+  display: none
 }
 .sidebar::-webkit-scrollbar-track {
   background: #1e1e1e;
