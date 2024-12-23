@@ -20,55 +20,18 @@ def generate_grc_question(category, difficulty):
     prompt = f""" 
 You are an expert in Governance, Risk, and Compliance (GRC) topics, as well as broad information security governance and frameworks 
 found in certifications like CISSP, CompTIA Advanced Security Practitioner (CASP+), CISM, CRISC, and others. Your role is to generate 
-a multiple-choice question (MCQ) that is both challenging and realistic.
+challenging and diverse test questions related to governance, risk management, risk thresholds, types of risk, Audit, Management, Policy, Cyber Security Ethics, Threat Assessment, 
+Leadership, Business Continuity, compliance ,regulations, incident resposne, and more. focusing on preparing for exams like CISSP and CompTIA certifications. Ensure the questions cover a wide range of scenarios,
+principles, and concepts, with multiple-choice answers that are nuanced and complex, avoiding repetitive patterns or overly simplified examples.
 
 CONTEXT: The user has selected:
 - Category: {category} (e.g., 'Regulation', 'Risk Management', 'Compliance', 'Audit', 'Governance', 'Management', 'Policy', 'Ethics', 'Threat Assessment', 'Leadership', 'Business Continuity', 'Random')
 - Difficulty: {difficulty} (e.g., 'Easy', 'Medium', 'Hard')
 
-REQUIREMENTS FOR QUESTION:
-1. The question should be related to GRC topics and may cover not just frameworks but also:
-   - Governance aspects: Strategic Alignment, Policy Development, Stakeholder Engagement, Board Oversight, 
-     Setting Security Objectives, Measuring Governance Maturity, Mergers & Acquisitions security considerations, 
-     Ethical decision-making in security leadership, Communication strategies for reporting to executive management,
-     Cybersecurity strategy integration with business goals, Executive-level reporting on security investments and ROI,
-     Using maturity models (CMMI) for governance improvement, Handling organizational changes post-intrusion,
-     Legal advisory board integration, Conflicts of interest in governance roles, Cultural alignment for security awareness.
-   - Compliance domains: Privacy laws (GDPR, CCPA), sector-specific regulations (HIPAA for healthcare, GLBA for financial services), 
-     Payment card standards (PCI-DSS), U.S. federal mandates (FISMA), NIST 800-53 controls, SOX requirements, data sovereignty laws, 
-     emerging regulations (AI governance principles), industry-standard certifications (ISO 27001), 
-     International Data Transfer frameworks (Schrems II considerations), Safe Harbor agreements, AML (Anti-Money Laundering) and KYC (Know Your Customer) guidelines,
-     Cross-border data transfer restrictions, Localization laws for critical data, Compliance mapping across multiple jurisdictions,
-     Code of conduct enforcement, Anti-bribery and corruption laws (FCPA, UK Bribery Act), Biometric data handling regulations.
-   - Risk management methodologies: ISO 31000, NIST RMF, FAIR model for quantitative risk analysis, OCTAVE for operational risk,
-     integrating risk registers, performing Business Impact Analysis (BIA), differentiating between inherent and residual risk,
-     periodic risk evaluations, continuous monitoring, ties to enterprise risk management (ERM), risk aggregation techniques, 
-     scenario analysis for strategic risk, cyber insurance considerations,
-     Risk appetite statements and their influence on control decisions, Risk quantification models, Threat intelligence-driven risk adjustments,
-     Use of KRI/KPIs in risk oversight, Downstream dependency analysis, Evaluating risk velocity and persistence.
-   - Security governance components: Incident Response Frameworks, Disaster Recovery and Business Continuity Planning, 
-     Vendor/Third-Party Risk Management, Supply Chain Security, Asset Management, Data Governance (classification, handling), 
-     Security Operations (Logging, Monitoring, SIEM, SOAR), Secure Software Development Life Cycle (SSDLC), 
-     Insider Threat Management, Change Management processes, Secure Cloud Governance models, threat intelligence integration,
-     Secure configuration baselines and hardening guides, Patch management strategies, Secure DevOps integration,
-     Privileged Access Management (PAM), Micro-segmentation strategies, Ethical hacking programs and bug bounty initiatives,
-     Implementing honeypots for threat detection, Integration of AI-driven anomaly detection tools.
-   - Managerial and Security Control Frameworks: COBIT for IT Governance, ISO 38500 for IT Governance principles, ITIL for Service Management,
-     TOGAF for enterprise architecture, Zero Trust Architecture principles, Access Control models (RBAC, ABAC, MAC, DAC), 
-     Cloud Security Governance (CSA CCM), Penetration Testing Methodologies, Vulnerability Management lifecycles, 
-     Security Assessments (internal audits, external audits, compliance checks), Digital Ethics frameworks, 
-     Data Ethics Frameworks, Security Program Development and continuous improvement strategies,
-     Tailored assurance reports (SOC 2, SOC 3), Integrating ITIL change management with security reviews, 
-     Aligning COBIT objectives with business processes, Using Gap assessments to drive continuous improvement, 
-     Mapping security controls to business objectives, Leveraging Enterprise Architecture (EA) to support compliance, 
-     Evaluating Zero Trust adoption barriers, Implementing credentialless authentication mechanisms, SASE frameworks,
-     Adaptive Access Control strategies, Fine-grained attribute-based policies for least privilege.
+REQUIREMENTS
+1. Four options (0, 1, 2, 3) total, one correct answer. The incorrect options should be very plausible but not correct, requiring the test-taker to carefully differentiate.
 
-
-
-2. Four options (0, 1, 2, 3) total, one correct answer. The incorrect options should be very plausible but not correct, requiring the test-taker to carefully differentiate.
-
-3. Explanations:
+2. Explanations:
    - For the correct answer: Provide multiple sentences detailing exactly why it’s correct, clearly tying it back to the question’s scenario or concept. Show how it fulfills the requirements asked in the question as well as why the other answer choices are incorrect/not the correct answer..
    - For each incorrect answer: Provide multiple sentences detailing why it is NOT correct aswell as why the other incorrect answer choices are incorrect, and why then tell the user what the correct answer is and why it is correct. 
      Do not just say it’s incorrect; fully explain what that framework/control/standard/principle primarily addresses and why it falls short. 
@@ -76,13 +39,13 @@ REQUIREMENTS FOR QUESTION:
    - All explanations should be in-depth and more than just naming what something is—explain conceptually why it aligns or does not align with the question’s key point.
    - Regardless of user choice, the generated output must contain full explanations for all answer choices provided. The explanations are produced in advance as part of the JSON object. Each explanation should be at least 3 sentences, rich in detail and conceptual clarity.
 
-4. Include an "exam_tip" field that provides a short, memorable takeaway or mnemonic to help differentiate the correct concept from the others. The exam tip should help the user recall why the correct answer stands out.
+3. Include an "exam_tip" field that provides a short, memorable takeaway or mnemonic to help differentiate the correct concept from the others. The exam tip should help the user recall why the correct answer stands out.
 
-5. Return ONLY a JSON object with the fields:
+4. Return ONLY a JSON object with the fields:
    "question", "options", "correct_answer_index", "explanations", and "exam_tip"
    No extra text, no Markdown, no commentary outside the JSON.
 
-6. For each explanation (correct and incorrect):
+5. For each explanation (correct and incorrect):
    - At minimum of 3 sentences for the correct answer.
    - if the user gets the answer correct provide minium 3 senetence answer as to why it is correct, but also why the other answer choices listed are not the correct answer.
    - Substantial detail.
@@ -92,12 +55,12 @@ EXAMPLE FORMAT (this is not real content, just structure, make sure to use all t
 {{
   "question": "The question",
   "options": ["Option 0","Option 1","Option 2","Option 3"],
-  "correct_answer_index": C,
+  "correct_answer_index": 2,
   "explanations": {{
-    "0": "Explain thoroughly why option A fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect.",
-    "1": "Explain thoroughly why option B fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect.",
-    "2": "Explain thoroughly why option C is correct, linking its characteristics to the question scenario and why the other answer choices are incorrect",
-    "3": "Explain thoroughly why option D fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect."
+    "0": "Explain thoroughly why option 0 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect.",
+    "1": "Explain thoroughly why option 1 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect.",
+    "2": "Explain thoroughly why option 2 is correct, linking its characteristics to the question scenario and why the other answer choices are incorrect",
+    "3": "Explain thoroughly why option 3 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect."
   }},
   "exam_tip": "A short, memorable hint or mnemonic that differentiates the correct approach from others."
 }}
@@ -111,7 +74,7 @@ Now generate the JSON object following these instructions.
         response = client.chat.completions.create(
             model="gpt-4o",  
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=1000,
+            max_tokens=800,
             temperature=0.7,
         )
 
