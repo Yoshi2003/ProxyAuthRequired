@@ -1,4 +1,3 @@
-/* Reset and Global Styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -22,8 +21,8 @@ body, html {
 /* Resources Background */
 .resources-background {
   display: flex;
-  justify-content: center; /* Center the container horizontally */
-  align-items: flex-start; /* Align the container to the top */
+  justify-content: center; 
+  align-items: flex-start;
   min-height: 100vh;
   background: url('./Resourcebackground.jpg') center center no-repeat;
   background-attachment: fixed;
@@ -32,15 +31,9 @@ body, html {
   box-sizing: border-box;
 }
 
-/* Resources Container */
+
 .resources-container {
   font-family: "Courier New", monospace;
-  
-  /* Remove the background image to prevent it from being overridden */
-  /* background: url('./Resourcebackground.jpg') center center no-repeat;
-  background-size: cover; */
-  
-  /* Keep the semi-transparent background for readability */
   background: rgba(18, 18, 18, 0.85);
   color: #ffffff;
   padding: 2rem;
@@ -48,7 +41,7 @@ body, html {
   width: 100%;
   max-width: 1000px;
   box-sizing: border-box;
-  margin: 40px auto; /* Center the container with vertical spacing */
+  margin: 40px auto; 
 }
 
 /* Resources Header */
