@@ -116,8 +116,8 @@ body, html {
 }
 
 .certifications-list ul {
-  list-style:none;
-  padding:0;
+  list-style: none;
+  padding: 1.75rem;
 }
 
 .certifications-list li {
