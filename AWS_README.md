@@ -101,7 +101,7 @@ The deployment architecture is meticulously crafted to serve a React application
 - Created a root CA for internal certificate management.
 - Issued certificates for secure communication between services.
 
-###78. Amazon EC2
+### 7. Amazon EC2
 
 **Role**: Hosts the Nginx reverse proxy and Apache HTTP Server.
 
