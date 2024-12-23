@@ -86,7 +86,7 @@ const otherResources = [
   
 ];
 
-// CompTIA Objectives Array
+
 const comptiaObjectives = [
   { cert: 'A+ Core 1', url: 'https://partners.comptia.org/docs/default-source/resources/comptia-a-new-core-objectives-(3-0)' },
   { cert: 'A+ Core 2', url: 'https://partners.comptia.org/docs/default-source/resources/comptia-a-220-1102-exam-objectives-(3-0)' },
@@ -108,7 +108,7 @@ const comptiaObjectives = [
   { cert: 'SecurityX (CASP 005)', url: 'https://partners.comptia.org/docs/default-source/resources/comptia-securityx-cas-005-exam-objectives-(3-0)' }
 ];
 
-// Security Frameworks Array
+
 const securityFrameworks = [
   { name: 'NIST Cybersecurity Framework', url: 'https://www.nist.gov/cyberframework' },
   { name: 'ISO/IEC 27001', url: 'https://www.iso.org/isoiec-27001-information-security.html' },
@@ -141,7 +141,7 @@ const securityFrameworks = [
   { name: 'ISO 22301 (Business Continuity)', url: 'https://www.iso.org/iso-22301-business-continuity.html' }
 ];
 
-// Helper Function to Capitalize First Letter
+
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -162,10 +162,9 @@ const resourcesData = {
   other: [...otherResources],
   linkedin: [...linkedInPeople],
 
-  // Master Category: CompTIA Certification Objectives
+  
   'CompTIA Certification Objectives': comptiaObjectives.map((obj) => ({ name: obj.cert, url: obj.url })),
 
-  // Individual Certification Categories
 
   // A+ Category
   'A+': [
@@ -179,7 +178,7 @@ const resourcesData = {
     // Add more A+ specific resources here
   ],
 
-  // Network+ Category
+ 
   'Network+': [
     // Objective Links
     ...comptiaObjectives
@@ -191,7 +190,7 @@ const resourcesData = {
     // Add more Network+ specific resources here
   ],
 
-  // Security+ Category
+  
   'Security+': [
     // Objective Links
     ...comptiaObjectives
@@ -203,7 +202,7 @@ const resourcesData = {
     // Add more Security+ specific resources here
   ],
 
-  // CySA+ Category
+  
   'CySA+': [
     // Objective Links
     ...comptiaObjectives
@@ -215,7 +214,7 @@ const resourcesData = {
     // Add more CySA+ specific resources here
   ],
 
-  // SecurityX/CASP Category
+  
   'SecurityX/CASP': [
     // Objective Links
     ...comptiaObjectives
@@ -227,7 +226,7 @@ const resourcesData = {
     // Add more SecurityX/CASP specific resources here
   ],
 
-  // PenTest+ Category
+  
   'PenTest+': [
     // Objective Links
     ...comptiaObjectives
