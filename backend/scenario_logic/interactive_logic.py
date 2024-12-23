@@ -19,6 +19,7 @@ def generate_interactive_questions(scenario_text):
             "that require critical thinking. For each question, provide four options labeled \"A\", \"B\", \"C\", and \"D\". "
             "Ensure that the keys in the options object are only the letters \"A\", \"B\", \"C\", and \"D\", and the values are the option texts without the letters. "
             "Indicate the correct answer by specifying only the option letter (e.g., \"D\"). Additionally, provide a concise explanation for the correct answer. "
+            "The question should not be obviously said/shown in the scenario, it should be about/related to the scenario, but the answer doesnt have to be directly in the scenario. "
             "The output must be a valid JSON array formatted exactly as shown below, with no additional text:\n\n"
             "[\n"
             "  {\n"
