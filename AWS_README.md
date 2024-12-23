@@ -156,13 +156,13 @@ The deployment process involves setting up and configuring various AWS services 
 
 ### Nginx Reverse Proxy Configuration:
 
-- Installed and configured Nginx on the EC2 instance.
+- Installed and configured Nginx on the through the Docker container.
 - Set up routing rules to direct `/api/` requests to the backend API server via Apache.
 - Routed all other requests to the React frontend.
 
 ### Apache HTTP Server Configuration:
 
-- Installed Apache on the EC2 instance.
+- Installed Apache on the EC2 instance through the Docker container.
 - Configured Apache to proxy `/api/` requests to the backend service running on port `5000`.
 - Configured Apache to proxy `/` requests to the React application running on port `3000`.
 
@@ -178,7 +178,7 @@ The deployment process involves setting up and configuring various AWS services 
 
 ## GitHub Actions Workflow
 
-To automate deployments to Amazon EC2, I set up a GitHub Actions workflow. This workflow triggers on every push to the main branch and handles the deployment process seamlessly.
+To automate deployments to Amazon EC2, I set up a GitHub Actions workflow. This workflow triggers on every push to the main branch and handles the deployment process automatically.
 
 ### Workflow Configuration: `deploy-to-ec2.yml`
 
@@ -245,7 +245,6 @@ jobs:
 - **Trigger:** The workflow triggers on every push to the main branch.
 - **Permissions:** Grants read access to repository contents.
 - **Job:** Deploy to EC2:
-  - **Checkout Repository:** Uses the `actions/checkout@v4` action to clone the repository.
   - **Configure SSH Access:** Uses the `webfactory/ssh-agent@v0.5.3` action to set up SSH access using the private key stored in GitHub Secrets (`EC2_SSH_PRIVATE_KEY`).
   - **Deploy to EC2:**
     - Establishes an SSH connection to the EC2 instance.
@@ -257,6 +256,7 @@ jobs:
     - Rebuilds Docker containers without using cache to ensure the latest changes are incorporated.
     - Starts the Docker containers in detached mode, removing any orphaned containers.
     - Cleans up any dangling Docker images to free up space.
+   
 
 ## Monitoring and Logging
 
@@ -337,7 +337,7 @@ To protect the application from malicious traffic, I configured AWS WAF with cus
 - **Rule:** Prevents DDoS attacks by limiting the number of requests from a single IP within a specified time frame.
 - **Configuration:**
   - Set a threshold for the number of allowed requests per minute.
-  - Configured the rule to block any IP exceeding this threshold.
+  - Configured the rule to block any IP exceeding this threshold (1000).
 
 #### SQL Injection Protection
 
@@ -390,7 +390,7 @@ For reference, here are the detailed specifications of the EC2 instance hosting 
 - **Elastic IP:** `98.83.245.82`
 - **Security Groups:** Configured to allow HTTP (80), HTTPS (443), and SSH (22) from specific IPs.
 - **Key Pair:** `xploitcraft`
-- **IAM Role:** `Proxy`
+- **IAM Role:** `Prod`
 - **Monitoring:** Enabled detailed monitoring via CloudWatch.
 - **Termination Protection:** Enabled to prevent accidental termination.
 - **Launch Time:** Sun Dec 22 2024 00:39:25 GMT-0500 (Eastern Standard Time)
