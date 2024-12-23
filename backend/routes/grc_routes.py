@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 
 grc_bp = Blueprint('grc', __name__)
 
-GRC_CATEGORIES = ["Regulation", "Risk Management", "Compliance", "Audit", "Governance", "Random"]
+GRC_CATEGORIES = ["Regulation", "Risk Management", "Compliance", "Audit", "Governance", "Management", "Policy", "Ethics", "Threat Assessment", "Leadership", "Business Continuity", "Random"]
 DIFFICULTY_LEVELS = ["Easy", "Medium", "Hard"]
 
 @grc_bp.route('/generate_question', methods=['POST'])
