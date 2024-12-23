@@ -9,14 +9,13 @@ This document provides a comprehensive overview of the deployment process, archi
 - [AWS Services Used](#aws-services-used)
   1. [Amazon CloudFront](#1-amazon-cloudfront)
   2. [Amazon S3](#2-amazon-s3)
-  3. [Amazon Route 53](#3-amazon-route-53)
-  4. [AWS WAF (Web Application Firewall)](#4-aws-waf-web-application-firewall)
-  5. [Amazon CloudWatch](#5-amazon-cloudwatch)
-  6. [AWS Certificate Manager (ACM)](#6-aws-certificate-manager-acm)
-  7. [AWS Private CA](#7-aws-private-ca)
-  8. [Amazon EC2](#8-amazon-ec2)
-  9. [Amazon EventBridge](#9-amazon-eventbridge)
-  10. [AWS Global Accelerator](#10-aws-global-accelerator)
+  3. [AWS WAF (Web Application Firewall)](#4-aws-waf-web-application-firewall)
+  4. [Amazon CloudWatch](#5-amazon-cloudwatch)
+  5. [AWS Certificate Manager (ACM)](#6-aws-certificate-manager-acm)
+  6. [AWS Private CA](#7-aws-private-ca)
+  7. [Amazon EC2](#8-amazon-ec2)
+  8. [Amazon EventBridge](#9-amazon-eventbridge)
+  9. [AWS Global Accelerator](#10-aws-global-accelerator)
 - [Deployment Process](#deployment-process)
 - [GitHub Actions Workflow](#github-actions-workflow)
   - [Workflow Configuration: deploy-to-ec2.yml](#workflow-configuration-deploy-to-ec2yml)
@@ -65,14 +64,8 @@ The deployment architecture is meticulously crafted to serve a React application
 - Redirects `proxyauthrequired.com` to `www.proxyauthrequired.com` since Domain.com does not support ANAMES at the root.
 - **Website Endpoint**: `http://proxyauthrequired.com.s3-website-us-east-1.amazonaws.com`
 
-### 3. Amazon Route 53
 
-**Role**: Manages DNS records.
-
-**Configurations**:
-- CNAME records configured to point `www.proxyauthrequired.com` to the CloudFront distribution (`d2tdaa7s9r0aij.cloudfront.net`).
-
-### 4. AWS WAF (Web Application Firewall)
+### 3. AWS WAF (Web Application Firewall)
 
 **Role**: Protects the application from malicious traffic.
 
@@ -83,7 +76,7 @@ The deployment architecture is meticulously crafted to serve a React application
 **WAF Rules**:
 - Custom rules to block malicious bots based on User-Agent strings and IP addresses.
 
-### 5. Amazon CloudWatch
+### 4. Amazon CloudWatch
 
 **Role**: Monitors and logs application metrics.
 
@@ -92,7 +85,7 @@ The deployment architecture is meticulously crafted to serve a React application
 - Monitors traffic patterns.
 - Sets up alerts for traffic spikes and error rates.
 
-### 6. AWS Certificate Manager (ACM)
+### 5. AWS Certificate Manager (ACM)
 
 **Role**: Manages SSL/TLS certificates.
 
@@ -100,7 +93,7 @@ The deployment architecture is meticulously crafted to serve a React application
 - Generated certificates for `proxyauthrequired.com` and `www.proxyauthrequired.com`.
 - Attached certificates to the CloudFront distribution for secure communication.
 
-### 7. AWS Private CA
+### 6. AWS Private CA
 
 **Role**: Manages internal certificates for secure service communication.
 
@@ -108,7 +101,7 @@ The deployment architecture is meticulously crafted to serve a React application
 - Created a root CA for internal certificate management.
 - Issued certificates for secure communication between services.
 
-### 8. Amazon EC2
+###78. Amazon EC2
 
 **Role**: Hosts the Nginx reverse proxy and Apache HTTP Server.
 
@@ -130,11 +123,11 @@ The deployment architecture is meticulously crafted to serve a React application
 - Runs Nginx as a reverse proxy.
 - Apache HTTP Server proxies requests to the React frontend (port 3000) or API backend (port 5000).
 
-### 9. Amazon EventBridge
+### 8. Amazon EventBridge
 
 **Role**: Manages event-driven workflows and integrations.
 
-### 10. AWS Global Accelerator
+### 9. AWS Global Accelerator
 
 **Role**: Improves availability and performance by directing traffic through the AWS global network.
 
@@ -149,10 +142,6 @@ The deployment process involves setting up and configuring various AWS services 
 - Set Viewer Protocol Policy to redirect HTTP to HTTPS.
 - Configured the origin to point to the Nginx server on the EC2 instance.
 
-### Route 53 Setup:
-
-- Created CNAME records to point `www.proxyauthrequired.com` to the CloudFront distribution.
-- Configured an S3 bucket to redirect the root domain `proxyauthrequired.com` to `www.proxyauthrequired.com`.
 
 ### Nginx Reverse Proxy Configuration:
 
