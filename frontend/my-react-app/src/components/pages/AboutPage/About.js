@@ -1,5 +1,6 @@
 import React from 'react';
 import './About.css'; // Import the CSS for styling
+import Portfolio_notegg from '/app/src/components/EasterEgg/Portfolio_notegg';
 
 function About() {
   return (
@@ -7,7 +8,7 @@ function About() {
       {/* About Section */}
       <div className="about-content">
         <h1 className="about-main-header orbitron-font">About ProxyAuthRequired</h1>
- {/* Main header now just says "About" */}
+
         
         <section className="about-intro">
           <p>
@@ -20,7 +21,6 @@ function About() {
 
         {/* Tools Section */}
         <section className="about-tools">
-          {/* First Column: ScenarioSphere and Log Analysis */}
           <div className="tool-column">
             <div className="tool-card">
               <h3>Xploitcraft</h3>
@@ -32,7 +32,6 @@ function About() {
             </div>
           </div>
 
-          {/* Second Column: AnalogyHub and GRC Wizard */}
           <div className="tool-column">
             <div className="tool-card">
               <h3>AnalogyHub</h3>
@@ -44,7 +43,7 @@ function About() {
             </div>
           </div>
 
-          {/* Third Column: Red vs Blue and Daily Cyber Brief */}
+
           <div className="tool-column">
             <div className="tool-card">
               <h3>Scenario Sphere</h3>
@@ -57,62 +56,94 @@ function About() {
           </div>
         </section>
 
-        {/* Certifications Section */}
+
         <section className="about-certifications">
           <div className="certifications-list">
             <div>
-              <h3>Current Certifications</h3>
+              <h3>Current Certifications ---</h3>
               <ul>
                 <li>CompTIA A+</li>
                 <li>CompTIA Network+</li>
                 <li>CompTIA Security+</li>
-                <li>CompTIA  Cloud+</li>
                 <li>CompTIA CySa+</li>
                 <li>CompTIA Pentest+</li>
                 <li>CompTIA CASP+</li>
-                <li>CompTIA Linux+</li>
                 <li>Python PCEP</li>
               </ul>
             </div>
             <div>
-              <h3>In Progress/Up Next</h3>
+              <h3> --- In Progress/Up Next</h3>
               <ul>
                 <li>CISSP</li>
                 <li>OSCP</li>
-                <li>OSDA</li>
                 <li>OSWA</li>
                 <li>OSWE</li>
                 <li>OSEP</li>
                 <li>OSMR</li>
                 <li>OSED</li>
-                <li>KLCP</li>
               </ul>
             </div>
           </div>
         </section>
 
-        <section className="about-links">
-  <h2 className="links-title">Links</h2>
-  <div className="links-container">
-    <p>
-      <strong className="github-title">GitHub:</strong> 
-      <a className="repository-link" href="https://github.com/Yoshi2003/ProxyAuthRequired" target="_blank" rel="noopener noreferrer">Repository</a>
-    </p>
-    <p>
-      <strong className="linkedin-title">LinkedIn:</strong> 
-      <a className="linkedin-link" href="https://www.linkedin.com/in/carter-perez-ProxyAuthRequired/" target="_blank" rel="noopener noreferrer">Carter's LinkedIn</a>
-    </p>
-  </div>
-</section>
 
+        <section className="about-links">
+          <h2 className="links-title">Links</h2>
+          <div className="links-container">
+            <p>
+              <strong className="github-title">GitHub:</strong> 
+              <a className="repository-link" href="https://github.com/Yoshi2003/ProxyAuthRequired" target="_blank" rel="noopener noreferrer">Repository</a>
+            </p>
+            <p>
+              <strong className="linkedin-title">LinkedIn:</strong> 
+              <a className="linkedin-link" href="https://www.linkedin.com/in/carter-perez-ProxyAuthRequired/" target="_blank" rel="noopener noreferrer">Carter's LinkedIn</a>
+            </p>
+          </div>
+        </section>
 
         {/* About Carter Section */}
         <section className="about-carter">
-  <h2 className="carter-title">About Carter</h2>
-  <p className="carter-description">
-    I am a 21-year-old Integration Technician at Sealing Tech, driven by a passion for making cybersecurity learning accessible and enjoyable. Formerly a general manager in the fast-food industry just one year ago, I’ve since changed paths and am now pursuing a master’s degree in Cybersecurity at UMGC. I draw inspiration from my favorite show, Mr. Robot, channeling that creative energy into the theme of this webiste. Outside of work, I enjoy speedruning certifications for fun, coding programs to streamline my daily life, and continually pushing myself forward— As I move toward becoming a cybersecurity analyst, then a penetration tester, stepping into GRC management, and ultimately a CTO role, I thrive on self-learning, personal growth, and creative problem-solving. Thanks for checking out the site, and I hope you find it useful :)
-  </p>
-</section>
+          <h2 className="carter-title">About Carter</h2>
+          <p className="carter-description">
+            I am a 21-year-old Integration Technician at Sealing Tech, driven by a passion for making cybersecurity learning accessible and enjoyable. Formerly a general manager in the fast-food industry just one year ago, I’ve since changed paths and am now pursuing a master’s degree in Cybersecurity at UMGC. I draw inspiration from my favorite show, Mr. Robot, which is the theme of this webiste. Ouside of work I enjoy studying for certifcations and a hopbby of mine is to speedrun them as it chlannges me. I also enjoy learnbing new things such as programminga dn web design, aswell as coding prgrams to streamline my daily life, As I move toward becoming a cybersecurity analyst, then a penetration tester, I hope to onde day step into  CTOP role or start my own cyber secuirty company.
+          </p>
+        </section>
+
+        {/* Contact Section */}
+        <section className="contact-section pulse-on-hover">
+          <h2 className="section-title-glitch">Contact</h2>
+          <p>Phone: <span className="purple-text">443-510-0866</span></p>
+          <p>
+            Email: 
+            <a 
+              href="mailto:CarterPerez-dev@ProxyAuthRequired.com"
+              className="custom-email-link"
+            >
+              CarterPerez-dev@ProxyAuthRequired.com
+            </a>
+          </p>
+        </section>
+
+        {/* ReadMe Section */}
+        <section className="readme-section pulse-on-hover">
+          <h2 className="section-title-glitch">ReadMe</h2>
+          <div className="readme-links">
+            <a href="#" target="_blank" rel="noopener noreferrer">README.md </a>
+            <a href="#" target="_blank" rel="noopener noreferrer">AWS.md </a>
+            <a href="#" target="_blank" rel="noopener noreferrer">INSTALL.md </a>
+          </div>
+        </section>
+
+        {/* Portfolio Section */}
+        <section className="portfolio-section">
+          <h2 className="section-title-glitch ">Portfolio</h2>
+          <p>
+            Check out my{" "}
+            <a href="/Portfolio_notegg" target="_blank" rel="noopener noreferrer">
+              Portfolio
+            </a> 
+          </p>
+        </section>
       </div>
 
       <footer className="about-footer">

@@ -19,7 +19,7 @@ function Donate() {
                     <input
                         type="text"
                         id="bitcoinAddress"
-                        value="Your_Bitcoin_Address_Here"
+                        value="bc1q6qay0feuusu8yuvarcrvwlydtcsl65p6y9cm63"
                         readOnly
                     />
                     <button onClick={handleCopyAddress} className="copy-button">Copy</button>

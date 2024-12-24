@@ -11,6 +11,8 @@ import GRC from './components/pages/GRCpage/GRC';
 import DailyCyberBrief from './components/pages/DailyPage/DailyCyberBrief';
 import Resources from './components/pages/ResourcesPage/Resources';
 import Donate from './components/pages/DonatePage/Donate';
+import Portfolio from './components/EasterEgg/Portfolio.js';
+import Portfolio_notegg from './components/EasterEgg/Portfolio_notegg.js';
 
 import './components/pages/XploitcraftPage/App.css';
 
@@ -31,6 +33,8 @@ function App() {
             <Route path="/dailycyberbrief" element={<DailyCyberBrief />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio_notegg" element={<Portfolio_notegg />} />
           </Routes>
         </div>
       </div>

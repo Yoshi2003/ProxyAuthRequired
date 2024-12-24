@@ -36,7 +36,6 @@ REQUIREMENTS
    - For each incorrect answer: Provide multiple sentences detailing why it is NOT correct aswell as why the other incorrect answer choices are incorrect, and why then tell the user what the correct answer is and why it is correct. 
      Do not just say it’s incorrect; fully explain what that framework/control/standard/principle primarily addresses and why it falls short. 
      Highlight conceptual differences, limitations, or focus areas that differ from the question’s criteria.
-   - All explanations should be in-depth and more than just naming what something is—explain conceptually why it aligns or does not align with the question’s key point.
    - Regardless of user choice, the generated output must contain full explanations for all answer choices provided. The explanations are produced in advance as part of the JSON object. Each explanation should be at least 3 sentences, rich in detail and conceptual clarity.
 
 3. Include an "exam_tip" field that provides a short, memorable takeaway or mnemonic to help differentiate the correct concept from the others. The exam tip should help the user recall why the correct answer stands out.
